@@ -10,6 +10,7 @@ from decimal import Decimal
 import os
 import calendar
 from pydantic import BaseModel
+from fastapi.staticfiles import StaticFiles
 
 from models import Account, Category, Tag, RecurringRule, Transaction, UserProfile
 
@@ -83,9 +84,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-async def root():
-    return {"message": "Benvenuto nell'API di Monthly Expense Manager! Visita /docs per la documentazione interattiva."}
 
 # --- ACCOUNTS ENDPOINTS ---
 
@@ -403,3 +401,7 @@ async def get_category_stats(
             
     stats.sort(key=lambda x: x["percentage"], reverse=True)
     return stats
+
+# Serve il frontend statico
+frontend_path = os.path.join(os.path.dirname(__file__), "..", "frontend")
+app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")

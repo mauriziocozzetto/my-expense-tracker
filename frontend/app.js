@@ -222,8 +222,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // === API Integration & Charts (Simulated Fetch) ===
-    const API_BASE = 'http://127.0.0.1:8000'; // Sostituire con base URL reale
+    // === API Integration & Charts ===
+    const API_BASE = ''; // Ora il frontend e il backend sono sullo stesso server
 
     let annualChartInstance = null;
     let categoryChartInstance = null;
