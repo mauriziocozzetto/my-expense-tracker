@@ -1,0 +1,16 @@
+# Ambienti virtuali
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Database SQLite
+data/*.db
+*.sqlite3
+
+# File macOS
+.DS_Store
+
+# Configurazione agenti
+.agents/
