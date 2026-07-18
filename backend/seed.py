@@ -1,8 +1,8 @@
 import asyncio
 from sqlmodel import SQLModel, create_engine
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from models import Account, Category, Tag
-from main import init_db
+from backend.models import Account, Category, Tag
+from backend.main import init_db
 from decimal import Decimal
 
 DATABASE_URL = "sqlite+aiosqlite:///../data/expense_manager.db"

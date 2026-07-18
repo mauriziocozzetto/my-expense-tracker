@@ -12,7 +12,7 @@ import calendar
 from pydantic import BaseModel
 from fastapi.staticfiles import StaticFiles
 
-from models import Account, Category, Tag, RecurringRule, Transaction, UserProfile
+from backend.models import Account, Category, Tag, RecurringRule, Transaction, UserProfile
 
 # Configurazione Database (supporto per SQLite in dev, ma strutturato per PostgreSQL tramite URL)
 DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite+aiosqlite:///../data/expense_manager.db")
