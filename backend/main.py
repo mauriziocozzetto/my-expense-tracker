@@ -14,8 +14,10 @@ from fastapi.staticfiles import StaticFiles
 
 from backend.models import Account, Category, Tag, RecurringRule, Transaction, UserProfile
 
+import os
+os.makedirs("data", exist_ok=True)
 # Configurazione Database (supporto per SQLite in dev, ma strutturato per PostgreSQL tramite URL)
-DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite+aiosqlite:///../data/expense_manager.db")
+DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite+aiosqlite:///data/expense_manager.db")
 
 engine = create_async_engine(DATABASE_URL, echo=True, future=True)
 

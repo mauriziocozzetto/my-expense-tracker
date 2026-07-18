@@ -5,7 +5,9 @@ from backend.models import Account, Category, Tag
 from backend.main import init_db
 from decimal import Decimal
 
-DATABASE_URL = "sqlite+aiosqlite:///../data/expense_manager.db"
+import os
+os.makedirs("data", exist_ok=True)
+DATABASE_URL = "sqlite+aiosqlite:///data/expense_manager.db"
 engine = create_async_engine(DATABASE_URL, echo=True)
 
 async def seed_data():
