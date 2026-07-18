@@ -68,10 +68,25 @@ async def process_recurring_transactions(session: AsyncSession):
     
     await session.commit()
 
+async def auto_seed(session: AsyncSession):
+    # Se le categorie non esistono, il db è vuoto: popoliamo con i default
+    res = await session.execute(select(Category))
+    if not res.first():
+        print("Database vuoto rilevato, inserimento dati iniziali (Categorie e Conti)...")
+        from decimal import Decimal
+        session.add_all([
+            Account(name="Conto Corrente", balance=Decimal("0.00")),
+            Account(name="Contanti", balance=Decimal("0.00")),
+            Category(name="Spesa"), Category(name="Casa"), Category(name="Bollette"),
+            Category(name="Stipendio"), Category(name="Svago"), Category(name="Trasporti")
+        ])
+        await session.commit()
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_db()
     async with AsyncSession(engine) as session:
+        await auto_seed(session)
         await process_recurring_transactions(session)
     yield
 
